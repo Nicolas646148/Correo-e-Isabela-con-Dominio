@@ -240,89 +240,96 @@ Después de haber hecho todas estas configuraciones nuestro servicio de DNS esta
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20151609.png)
 
 ## Servicio de Correo
+Para el levantamiento del servicio de Correo se usó un servidor Postfix, Dovecot y Thunderbird+Gmail, el cual nos permitió crear varios usuarios para los clientes del servidor, darles sus permisos pertinentes, poder acceder a la Interfaz Web del servidor y que los clientes también puedan acceder a ella, y que desde ahí puedan enviar emails, recibir emails, ver los emails que les han enviado y los que ellos han enviado; todo esto usando un dominio propio que ya se ha expuesto anteriormente.
 
-En esta sección se documenta el proceso seguido para levantar un servicio de correo utilizando Postfix, Dovecot y Thunderbird+Gmail, funcionando con un dominio propio y sustentado por un servidor DNS.
-
-### Instalación de Postfix
-1. Actualizar los paquetes del sistema:
+Los pasos, los comandos y las configuraciones que se hicieron para el levantamiento del servicio de Correo son los siguientes:
+1. Crear varios usuarios en el Sistema de Centos Stream 9 para el futuro servicio de Correo:
     ```bash
-    sudo apt update
-    sudo apt upgrade
+    sudo adduser nombre_usuario
+    sudo passwd nombre_usuario
     ```
 
-2. Instalar Postfix:
+2. Instalar todos los paquetes necesarios para levantar el servidor Postfix:
     ```bash
-    sudo apt install postfix
+    sudo dnf install postfix
     ```
 
-3. Configurar Postfix:
-    - Durante la instalación, seleccionar "Internet Site".
-    - Configurar el nombre del sistema de correo (ej. mail.tudominio.com).
+3. Iniciar, habilitar inicio automático, reiniciar y ver el estado del servidor Postfix:
+    ```bash
+    sudo systemctl start postfix
+    sudo systemctl enable postfix
+    sudo systemctl restart postfix
+    sudo systemctl status postfix
+    ```
+![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20154410.png)
 
-4. Editar el archivo de configuración de Postfix:
+4. Configurar el firewall de la máquina virtual para permitir el tráfico del servidor Postfix:
+    ```bash
+    sudo firewall-cmd --permanent --add-service=smtp
+    sudo firewall-cmd --reload
+    ```
+
+5. Editar el archivo /etc/postfix/main.cf, y el contenido que se debería modificar y agregar:
+- Comando para editar el archivo /etc/postfix/main.cf:
     ```bash
     sudo nano /etc/postfix/main.cf
     ```
-    - Añadir o modificar las siguientes líneas:
-        ```plaintext
-        myhostname = mail.tudominio.com
-        mydomain = tudominio.com
-        myorigin = /etc/mailname
-        mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
-        relayhost =
-        ```
+- Contenido que debería tener el archivo /etc/postfix/main.cf:
+    ```plaintext
+    smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+    smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+    smtpd_use_tls=yes
+    smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+    smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+    smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
 
-5. Reiniciar Postfix:
+    myhostname = correo.sistemasnida.es
+    myorigin = /etc/mailname
+    mydestination = $myhostname, sistemasnida.es, localhost.localdomain, localhost
+    relayhost =
+
+    mynetworks = 192.168.18.0/24, 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+
+    mailbox_size_limit = 0
+    recipient_delimiter = +
+    inet_interfaces = all
+    inet_protocols = all
+    ```
+- Después de haber editado el editado el archivo /etc/postfix/main.cf ejecutar el siguiente comando:
     ```bash
     sudo systemctl restart postfix
     ```
 
-### Instalación de Dovecot
-1. Instalar Dovecot:
+6. Instalar todos los paquetes necesarios para levantar el servidor Dovecot:
     ```bash
-    sudo apt install dovecot-core dovecot-imapd dovecot-pop3d
+    sudo dnf install dovecot
     ```
 
-2. Configurar Dovecot:
-    - Editar el archivo de configuración principal:
-        ```bash
-        sudo nano /etc/dovecot/dovecot.conf
-        ```
-        - Asegurarse de que las siguientes líneas estén presentes y descomentadas:
-            ```plaintext
-            protocols = imap pop3 lmtp
-            ```
-
-3. Configurar el directorio de correo:
-    - Editar el archivo de configuración de directorios de correo:
-        ```bash
-        sudo nano /etc/dovecot/conf.d/10-mail.conf
-        ```
-        - Modificar la línea `mail_location`:
-            ```plaintext
-            mail_location = maildir:~/Maildir
-            ```
-
-4. Reiniciar Dovecot:
+7. Iniciar, habilitar inicio automático, reiniciar y ver el estado del servidor Dovecot:
     ```bash
+    sudo systemctl start dovecot
+    sudo systemctl enable dovecot
     sudo systemctl restart dovecot
+    sudo systemctl status dovecot
+    ```
+![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20160204.png)
+
+8. Configurar el firewall de la máquina virtual para permitir el tráfico del servidor Dovecot:
+    ```bash
+    sudo firewall-cmd --permanent --add-service=imap
+    sudo firewall-cmd --reload
     ```
 
-### Configuración de Thunderbird con Gmail
-1. Abrir Thunderbird y añadir una nueva cuenta de correo.
-2. Introducir los datos de tu cuenta de dominio propio.
-3. Configurar los servidores IMAP y SMTP de acuerdo a la configuración de Postfix y Dovecot.
+9. Editar el archivo /etc/dovecot/dovecot.conf, y el contenido que se debería modificar y agregar:
+- Comando para editar el archivo /etc/dovecot/dovecot.conf:
+    ```bash
+    sudo nano /etc/dovecot/dovecot.conf
+    ```
 
-## Servicio de VoIP
-
-### Introducción
-En esta sección se documenta el proceso seguido para levantar un servicio de VoIP utilizando Isabela, funcionando con un dominio propio.
-
-### Requisitos
-- Servidor con sistema operativo Linux (ej. Ubuntu, CentOS)
-- Acceso a internet
-- Dominio propio
-- Servidor DNS configurado
+10. Instalar todos los paquetes necesarios para instalar el servicio Thunderbird+Gmail:
+    ```bash
+    sudo dnf install thunderbird
+    ```
 
 ### Instalación de Isabela
 1. Actualizar los paquetes del sistema:
