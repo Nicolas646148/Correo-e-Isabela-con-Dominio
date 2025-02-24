@@ -26,3 +26,123 @@ Los pasos, los comandos y las configuraciones que se hicieron para el levantamie
     sudo systemctl status named
     ```
 
+## Servicio de Correo
+
+### Introducción
+En esta sección se documenta el proceso seguido para levantar un servicio de correo utilizando Postfix, Dovecot y Thunderbird+Gmail, funcionando con un dominio propio y sustentado por un servidor DNS.
+
+### Instalación de Postfix
+1. Actualizar los paquetes del sistema:
+    ```bash
+    sudo apt update
+    sudo apt upgrade
+    ```
+
+2. Instalar Postfix:
+    ```bash
+    sudo apt install postfix
+    ```
+
+3. Configurar Postfix:
+    - Durante la instalación, seleccionar "Internet Site".
+    - Configurar el nombre del sistema de correo (ej. mail.tudominio.com).
+
+4. Editar el archivo de configuración de Postfix:
+    ```bash
+    sudo nano /etc/postfix/main.cf
+    ```
+    - Añadir o modificar las siguientes líneas:
+        ```plaintext
+        myhostname = mail.tudominio.com
+        mydomain = tudominio.com
+        myorigin = /etc/mailname
+        mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
+        relayhost =
+        ```
+
+5. Reiniciar Postfix:
+    ```bash
+    sudo systemctl restart postfix
+    ```
+
+### Instalación de Dovecot
+1. Instalar Dovecot:
+    ```bash
+    sudo apt install dovecot-core dovecot-imapd dovecot-pop3d
+    ```
+
+2. Configurar Dovecot:
+    - Editar el archivo de configuración principal:
+        ```bash
+        sudo nano /etc/dovecot/dovecot.conf
+        ```
+        - Asegurarse de que las siguientes líneas estén presentes y descomentadas:
+            ```plaintext
+            protocols = imap pop3 lmtp
+            ```
+
+3. Configurar el directorio de correo:
+    - Editar el archivo de configuración de directorios de correo:
+        ```bash
+        sudo nano /etc/dovecot/conf.d/10-mail.conf
+        ```
+        - Modificar la línea `mail_location`:
+            ```plaintext
+            mail_location = maildir:~/Maildir
+            ```
+
+4. Reiniciar Dovecot:
+    ```bash
+    sudo systemctl restart dovecot
+    ```
+
+### Configuración de Thunderbird con Gmail
+1. Abrir Thunderbird y añadir una nueva cuenta de correo.
+2. Introducir los datos de tu cuenta de dominio propio.
+3. Configurar los servidores IMAP y SMTP de acuerdo a la configuración de Postfix y Dovecot.
+
+## Servicio de VoIP
+
+### Introducción
+En esta sección se documenta el proceso seguido para levantar un servicio de VoIP utilizando Isabela, funcionando con un dominio propio.
+
+### Requisitos
+- Servidor con sistema operativo Linux (ej. Ubuntu, CentOS)
+- Acceso a internet
+- Dominio propio
+- Servidor DNS configurado
+
+### Instalación de Isabela
+1. Actualizar los paquetes del sistema:
+    ```bash
+    sudo apt update
+    sudo apt upgrade
+    ```
+
+2. Instalar Isabela:
+    ```bash
+    sudo apt install isabela
+    ```
+
+3. Configurar Isabela:
+    - Editar el archivo de configuración principal:
+        ```bash
+        sudo nano /etc/isabela/isabela.conf
+        ```
+        - Modificar las líneas necesarias para que apunten a tu dominio y servidor DNS.
+
+4. Reiniciar Isabela:
+    ```bash
+    sudo systemctl restart isabela
+    ```
+
+### Configuración de Clientes VoIP
+1. Descargar e instalar un cliente VoIP compatible (ej. Zoiper, Linphone).
+2. Configurar el cliente con los datos proporcionados por Isabela y el dominio propio.
+
+### Pruebas y Verificación
+1. Realizar pruebas de envío y recepción de correos para el servicio de correo.
+2. Realizar pruebas de llamadas VoIP para el servicio de VoIP.
+
+## Conclusión
+En este documento se ha detallado el proceso para levantar un servicio de correo y un servicio de VoIP utilizando Postfix, Dovecot, Thunderbird+Gmail e Isabela. Ambas configuraciones han sido probadas y verificadas con éxito utilizando un dominio propio y un servidor DNS.
