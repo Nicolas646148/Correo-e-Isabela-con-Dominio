@@ -356,6 +356,7 @@ Los pasos, los comandos y las configuraciones que se hicieron para el levantamie
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-25%20122339.png)
 
 - Servidor de Salida de IMAP:
+
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-25%20122403.png)
 
 13. Instalar todos los paquetes necesarios para instalar el servicio Thunderbird+Gmail en el servidor:
@@ -379,49 +380,50 @@ Los pasos, los comandos y las configuraciones que se hicieron para el levantamie
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20172135.png)
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20172146.png)
 
-3. Después se descargado la imagen ISO de Isabela en la página oficial:
+2. Después se descargado la imagen ISO de Isabela en la página oficial:
 
 https://www.issabel.org/go/download
 
-5. Con la imagen ISO ya descargada se la pone en el Disco de la Máquina Virtual para poder arrancarla y empezar con la instalación de Isabela como máquina virtual nativa:
+3. Con la imagen ISO ya descargada se la pone en el Disco de la Máquina Virtual para poder arrancarla y empezar con la instalación de Isabela como máquina virtual nativa:
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20174718.png)
 
-6. Cuando comencemos con la Instalación de Isabela, nos saldra el siguiente recuadro, le damos en Install:
+4. Cuando comencemos con la Instalación de Isabela, nos saldra el siguiente recuadro, le damos en Install:
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20174818.png)
 
-7. Después de algunos minutos, nos saldrá una inferfaz parecida a cuando creamos una máquina virtual de Centos Stream 9, por lo que los pasos a seguir serán muy parecidos a los de Centos:
+5. Después de algunos minutos, nos saldrá una inferfaz parecida a cuando creamos una máquina virtual de Centos Stream 9, por lo que los pasos a seguir serán muy parecidos a los de Centos:
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20175738.png)
 
-8. En la Sección de Idiomas seleccionamos nuestra ubicación si se lo ve pertinente, en la Sección de Teclado confirmamos que este bien la selección de Idioma, en la Sección de Destino de la Instalación seleccionamos el Disco en donde vamos a montar Isabela, en la Sección de Software seleccionamos la versión de Isabela que vamos a usar, y finalmente le damos click en la Sección Empezar Instalación:
+6. En la Sección de Idiomas seleccionamos nuestra ubicación si se lo ve pertinente, en la Sección de Teclado confirmamos que este bien la selección de Idioma, en la Sección de Destino de la Instalación seleccionamos el Disco en donde vamos a montar Isabela, en la Sección de Software seleccionamos la versión de Isabela que vamos a usar, y finalmente le damos click en la Sección Empezar Instalación:
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20180353.png)
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20180440.png)
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20180508.png)
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20180521.png)
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20180827.png)
 
-9. Después de que se haya acabado el primer proceso de la instalación se nos pedirá ingresar los datos para el root del sistema y para el usuario estándar nuestro que vayamos a crear en la máquina virtual, y finalmente esperamos que se acabe el proceso de instalación de Isabela:
+7. Después de que se haya acabado el primer proceso de la instalación se nos pedirá ingresar los datos para el root del sistema y para el usuario estándar nuestro que vayamos a crear en la máquina virtual, y finalmente esperamos que se acabe el proceso de instalación de Isabela:
 
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20181813.png)
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20181826.png)
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20181837.png)
 
-11. Después de que se haya acabado por completo el proceso de instalación de Isabela se reiniciará la máquina virtual y nos saldrá lo siguiente, que es la terminal del sistema, por lo que todo esta bien:
+8. Después de que se haya acabado por completo el proceso de instalación de Isabela se reiniciará la máquina virtual y nos saldrá lo siguiente, que es la terminal del sistema, por lo que todo esta bien:
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20183823.png)
 
-12. Después se nos pedirá que ingresemos una contraseña para la base de datos de MariaDB, y después de que la confirmemos, se comenzará a configurar por completo la base de datos de Isabela:
+9. Después se nos pedirá que ingresemos una contraseña para la base de datos de MariaDB, y después de que la confirmemos, se comenzará a configurar por completo la base de datos de Isabela:
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20182700.png)
 
-13. Después se nos pedirá que asignemos una contraseña al usuario administrador de Isabela, y después de que la confirmemos, se terminará de configurar todo y ya podremos acceder a Isabela:
+10. Después se nos pedirá que asignemos una contraseña al usuario administrador de Isabela, y después de que la confirmemos, se terminará de configurar todo y ya podremos acceder a Isabela:
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20183045.png)
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20184250.png)
 
-14. Ingresamos a la interfaz web de nuestro servidor Issabela. y realizamos la siguiente configuración del SIP Trunk para que funcione con el dominio ya creado:
+11. Ingresamos a la interfaz web de nuestro servidor Issabela. y realizamos la siguiente configuración del SIP Trunk para que funcione con el dominio ya creado:
+
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-25%20124814.png)
 
-14. Ahora para configurar y probar el funionamiento del servidor de Isabela descargamos e instalamos en el cliente del servidor un Programa-Cliente VoIP compatible, que en este caso es Zoiper:
+12. Ahora para configurar y probar el funionamiento del servidor de Isabela descargamos e instalamos en el cliente del servidor un Programa-Cliente VoIP compatible, que en este caso es Zoiper:
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20184724.png)
 
-15. Después de la instalación de Zoiper en el cliente, se configuran sus datos en la página web de Isabela para que pueda hacer uso del servicio de VoIP con el Dominio propio ya creado:
+13. Después de la instalación de Zoiper en el cliente, se configuran sus datos en la página web de Isabela para que pueda hacer uso del servicio de VoIP con el Dominio propio ya creado:
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-25%20125602.png)
 
 ### Pruebas de funcionalidad y Verificación de que los servicios valgan con el dominio creado
@@ -435,8 +437,9 @@ https://www.issabel.org/go/download
 - Recepción del mensaje enviado de un cliente a otro cliente:
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-25%20123836.png)
 
-3. Clientes de Isabela realizando llamadas y recibiendo llamadas a tráves del servicio VoIP por el servidor Isabela.
+2. Clientes de Isabela realizando llamadas y recibiendo llamadas a tráves del servicio VoIP por el servidor Isabela.
 - Probamos la funcionalidad del servicio de DNS con el servicio de VoIP accediendo a la inferfaz web de Isabela usando el dominio del servidor:
+
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-25%20125859.png)
 ![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-25%20125908.png)
 
