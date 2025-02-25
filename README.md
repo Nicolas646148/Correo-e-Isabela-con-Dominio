@@ -331,37 +331,69 @@ Los pasos, los comandos y las configuraciones que se hicieron para el levantamie
     sudo dnf install thunderbird
     ```
 
-### Instalación de Isabela
-1. Actualizar los paquetes del sistema:
-    ```bash
-    sudo apt update
-    sudo apt upgrade
-    ```
+### Servicio de Isabela
+Para el levantamiento del servicio de VoIP se usó un servidor Isabela, el cual fue levantado como una máquina virtual nativa, es decir, que a comparación de los demás servidores, los cuales fueron levantados en la misma máquina virtual de Centos Stream 9, el servidor de Isabela fue creado como una máquina virtual propia solo para el servicio de VoIP, el cual permitió crear varios usuarios para los clientes del servidor, darles sus permisos pertinentes, poder acceder a la Interfaz Web del servidor y que los clientes puedan, a través de la aplicación de Zoiper 5, realizar llamadas a otros clientes y recibir llamadas de otros clientes; todo esto usando un dominio propio que ya se ha expuesto anteriormente.
 
-2. Instalar Isabela:
-    ```bash
-    sudo apt install isabela
-    ```
+Los pasos, los comandos y las configuraciones que se hicieron para el levantamiento del servicio de VoIP son los siguientes:
+1. Creamos una máquina virtual en donde tendremos el servidor Isabela, máquina que tendrá 14 GB de RAM:
+![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20172135.png)
+![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20172146.png)
 
-3. Configurar Isabela:
-    - Editar el archivo de configuración principal:
-        ```bash
-        sudo nano /etc/isabela/isabela.conf
-        ```
-        - Modificar las líneas necesarias para que apunten a tu dominio y servidor DNS.
+3. Después se descargado la imagen ISO de Isabela en la página oficial:
 
-4. Reiniciar Isabela:
-    ```bash
-    sudo systemctl restart isabela
-    ```
+https://www.issabel.org/go/download
 
-### Configuración de Clientes VoIP
-1. Descargar e instalar un cliente VoIP compatible (ej. Zoiper, Linphone).
-2. Configurar el cliente con los datos proporcionados por Isabela y el dominio propio.
+5. Con la imagen ISO ya descargada se la pone en el Disco de la Máquina Virtual para poder arrancarla y empezar con la instalación de Isabela como máquina virtual nativa:
+![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20174718.png)
 
-### Pruebas y Verificación
-1. Realizar pruebas de envío y recepción de correos para el servicio de correo.
-2. Realizar pruebas de llamadas VoIP para el servicio de VoIP.
+6. Cuando comencemos con la Instalación de Isabela, nos saldra el siguiente recuadro, le damos en Install:
+![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20174818.png)
 
-## Conclusión
-En este documento se ha detallado el proceso para levantar un servicio de correo y un servicio de VoIP utilizando Postfix, Dovecot, Thunderbird+Gmail e Isabela. Ambas configuraciones han sido probadas y verificadas con éxito utilizando un dominio propio y un servidor DNS.
+7. Después de algunos minutos, nos saldrá una inferfaz parecida a cuando creamos una máquina virtual de Centos Stream 9, por lo que los pasos a seguir serán muy parecidos a los de Centos:
+![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20175738.png)
+
+8. En la Sección de Idiomas seleccionamos nuestra ubicación si se lo ve pertinente, en la Sección de Teclado confirmamos que este bien la selección de Idioma, en la Sección de Destino de la Instalación seleccionamos el Disco en donde vamos a montar Isabela, en la Sección de Software seleccionamos la versión de Isabela que vamos a usar, y finalmente le damos click en la Sección Empezar Instalación:
+![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20180353.png)
+![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20180440.png)
+![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20180508.png)
+![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20180521.png)
+![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20180827.png)
+
+9. Después de que se haya acabado el primer proceso de la instalación se nos pedirá ingresar los datos para el root del sistema y para el usuario estándar nuestro que vayamos a crear en la máquina virtual, y finalmente esperamos que se acabe el proceso de instalación de Isabela:
+
+![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20181813.png)
+![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20181826.png)
+![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20181837.png)
+
+11. Después de que se haya acabado por completo el proceso de instalación de Isabela se reiniciará la máquina virtual y nos saldrá lo siguiente, que es la terminal del sistema, por lo que todo esta bien:
+![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20183823.png)
+
+12. Después se nos pedirá que ingresemos una contraseña para la base de datos de MariaDB, y después de que la confirmemos, se comenzará a configurar por completo la base de datos de Isabela:
+![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20182700.png)
+
+13. Después se nos pedirá que asignemos una contraseña al usuario administrador de Isabela, y después de que la confirmemos, se terminará de configurar todo y ya podremos acceder a Isabela:
+![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20183045.png)
+![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20184250.png)
+
+14. Ahora para configurar y probar el funionamiento del servidor de Isabela descargamos e instalamos en el cliente del servidor un Programa-Cliente VoIP compatible, que en este caso es Zoiper:
+![](https://github.com/Nicolas646148/Correo-e-Isabela-con-Dominio/blob/main/Captura%20de%20pantalla%202025-02-24%20184724.png)
+
+15. Después de la instalación de Zoiper en el cliente, se configuran sus datos en la página web de Isabela para que pueda hacer uso del servicio de VoIP con el Dominio propio ya creado:
+
+
+### Pruebas de funcionalidad y Verificación de que los servicios valgan con el dominio creado
+1. Envío y recepción de correos de un cliente a otro cliente haciendo uso del servicio de correo por el servidor Postfix, Dovecot y Thunderbird+Gmail.
+   
+3. Clientes de Isabela realizando llamadas y recibiendo llamadas a tráves del servicio VoIP por el servidor Isabela.
+
+
+## Conclusiones
+Este trabajo ha permitido presentar los pasos, los comandos y las configuraciones que se hicieron para levantar los servicios de correo y VoIP en nuestro servidor montado en nuestra máquina virtual de Centos Stream 9, permitiendo que los clientes puedan hacer uso de los servicios con un dominio propio, por lo que se puede decir que los servicios que nuestro servidor ofrece son buenos y permiten a los clientes hacer lo que desean y buscan: mandar y recibir emails, y hacer y recibir llamadas, todo esto con un dominio propio.
+
+## Fuentes
+Redes Plus, “📢 DNS LINUX 💻 INSTALAR y configurar BIND9 🐧 Ubuntu,” YouTube. Oct. 02, 2019. [Online]. Available: https://www.youtube.com/watch?v=hq8kWcpGUvw
+
+Redes Plus, “📢CORREO LINUX 💻 INSTALAR y Configurar Postfix🐭 (Dovecot+⚡Thunderbird+Gmail) 🐧Ubuntu,” YouTube. Nov. 17, 2019. [Online]. Available: https://www.youtube.com/watch?v=kWNyiZfTp4E
+
+Lenin Obregon Espinoza, “COMO INSTALAR ISSABEL PBX EN VIRTUALBOX VIDEO 1,” YouTube. Feb. 20, 2024. [Online]. Available: https://www.youtube.com/watch?v=1bYE7sSu8AE
+
